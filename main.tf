@@ -6,9 +6,30 @@ locals {
   }
 }
 
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["099720109477"] # Canonical
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+}
+
+data "aws_vpc" "default" {
+  default = true
+}
+
+data "aws_subnets" "available" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+}
+
 resource "aws_instance" "webserver" {
-  ami           = "ami-0bbc328167dee8f3c"
+  ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
+  subnet_id     = data.aws_subnets.available.ids[0]
   tags = merge(
     local.common_tags,
     {

@@ -7,6 +7,10 @@ on:
 
 env:
   TF_VERSION: "1.9.0"  # Specify your preferred Terraform version
+  AWS_ACCESS_KEY_ID: "mock"
+  AWS_SECRET_ACCESS_KEY: "mock"
+  AWS_DEFAULT_REGION: "us-east-1"
+  AWS_EC2_METADATA_DISABLED: true
 
 jobs:
   terraform:

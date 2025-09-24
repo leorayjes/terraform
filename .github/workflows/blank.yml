@@ -11,6 +11,7 @@ env:
   AWS_SECRET_ACCESS_KEY: "mock"
   AWS_DEFAULT_REGION: "us-east-1"
   AWS_EC2_METADATA_DISABLED: true
+  AWS_SDK_LOAD_CONFIG: false
 
 jobs:
   terraform:

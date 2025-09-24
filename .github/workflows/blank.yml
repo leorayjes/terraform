@@ -7,11 +7,6 @@ on:
 
 env:
   TF_VERSION: "1.9.0"  # Specify your preferred Terraform version
-  AWS_ACCESS_KEY_ID: "mock"
-  AWS_SECRET_ACCESS_KEY: "mock"
-  AWS_DEFAULT_REGION: "us-east-1"
-  AWS_EC2_METADATA_DISABLED: true
-  AWS_SDK_LOAD_CONFIG: false
 
 jobs:
   terraform:
@@ -42,13 +37,20 @@ jobs:
         id: init
         run: terraform init
         env:
+          AWS_ACCESS_KEY_ID: "mock"
+          AWS_SECRET_ACCESS_KEY: "mock"
+          AWS_DEFAULT_REGION: "us-east-1"
           AWS_EC2_METADATA_DISABLED: true
 
       - name: Terraform Validate
         id: validate
-        run: terraform validate
+        run: terraform validate -no-color
         env:
+          AWS_ACCESS_KEY_ID: "mock"
+          AWS_SECRET_ACCESS_KEY: "mock"
+          AWS_DEFAULT_REGION: "us-east-1"
           AWS_EC2_METADATA_DISABLED: true
+          AWS_SDK_LOAD_CONFIG: false
 
 
 
